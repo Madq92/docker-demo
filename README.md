@@ -5,4 +5,4 @@ Deployment demonstration:
 - Build Docker images and deploy to docker swarm
   - `$ cd $PROJECT_ROOT`
   - `$ docker-compose build`
-  - `$ docker stack deploy -c docker-compose.yml dockerDemo`
+  - `$ docker stack deploy -c docker-compose.yml myapp`

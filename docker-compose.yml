@@ -2,8 +2,8 @@ version: "3.6"
 services:
   service:
     image: docker-demo:latest
-#    build:
-#      dockerfile: Dockerfile
+    build:
+      context: .
     ports:
       - "8080:9090"
     depends_on:
