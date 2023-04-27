@@ -1,14 +1,14 @@
-FROM jmxtrans/jmxtrans
-ENV APP_HOME /appHome
-ENV SERVICE_FILE docker-demo-0.0.1-SNAPSHOT.jar
-RUN mkdir ${APP_HOME} && mkdir ${APP_HOME}/config
+FROM openjdk:8-jdk-alpine
 
-COPY ./target/${SERVICE_FILE} ${APP_HOME}
-COPY ./service.sh ${APP_HOME}
-COPY ./jmxtrans.json /var/lib/jmxtrans
+RUN apk add --no-cache tzdata \
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && apk del tzdata
 
-WORKDIR ${APP_HOME}
-RUN chmod +x service.sh
+ENV APP_NAME docker-demo
 
-EXPOSE 8080
-CMD ./service.sh
+WORKDIR /app
+
+COPY target/docker-demo-0.0.1-SNAPSHOT.jar /app/${APP_NAME}.jar
+
+CMD java -jar /app/${APP_NAME}.jar

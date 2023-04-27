@@ -1,0 +1,13 @@
+FROM openjdk:8
+
+ENV APP_HOME /appHome
+ENV SERVICE_FILE tesla-used-car_prod_62769e0.jar
+RUN mkdir ${APP_HOME}
+
+COPY SERVICE_FILE ${APP_HOME}
+COPY application.properties ${APP_HOME}
+
+WORKDIR ${APP_HOME}
+
+EXPOSE 8080
+CMD java -jar ${SERVICE_FILE}
